@@ -1,0 +1,374 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:uxap="sap.uxap" xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:u="sap.ui.unified"
+	xmlns:form="sap.ui.layout.form" controllerName="com.sap.cp.dpa.invwpo.ReworkUI.controller.Create">
+		<App id="app">
+	<Page showHeader="false">
+		<content>
+			<uxap:ObjectPageLayout showTitleInHeaderContent="false" class="sapUiSizeCompact">
+				<uxap:sections>
+					<uxap:ObjectPageSection title="Header Details">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection title="Header Details">
+								<uxap:blocks>
+									<layout:Grid defaultSpan="XL12 L12 M12 S12">
+										<layout:content>
+											<sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true"
+										layout="ResponsiveGridLayout" id="form0" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+                                        columnsXL="6" columnsL="6" columnsM="6" emptySpanXL="3" emptySpanL="3" emptySpanM="3">
+										<sap.ui.layout.form:content>
+											<Label text="Company Code" required="true"/>
+											<Input value="{companyListModel>/value}" editable="false" submit="onsubmitValue" liveChange="onsubmitValue" valueState="{companyListModel>/error}" name="Company Code" placeholder="Text" showValueHelp="true" width="auto" valueHelpOnly="false" valueHelpRequest="onValueHelpRequest">
+                                            <layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+												</Input>
+                                            <Text width="100%" text="{companyListModel>/desc}">
+                                            <layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+												</Text>
+
+                                            <Label text="Vendor Number" required="true"/>
+											<Input name="Vendor" editable="false" value="{vendorListModel>/value}" submit="onsubmitValue" liveChange="onsubmitValue" valueState="{vendorListModel>/error}" placeholder="Text" showValueHelp="true" width="auto" valueHelpOnly="false" valueHelpRequest="onValueHelpRequest">
+												<layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+											</Input>
+											<Text width="100%" text="{vendorListModel>/desc}">
+												<layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+											</Text>
+                                            
+											<Label text="One Time Vendor"></Label>
+											<CheckBox id="OneTimeVendor" editable="false" select="handleTimeVendorCheckbox" selected="{createModel>/oneTimeVendor}"></CheckBox>
+											<Label xmlns="sap.m" required="true" text="One-time Vendor Name" visible="{vendorFieldsVisibility>/visible}"/>
+											<Input xmlns="sap.m" name="oneTimeVendorName" value="{createModel>/oneTimeVendorName}" submit="onsubmitValue" valueState="{createModel>/errorName}" placeholder="Text" type="Text" width="auto" valueHelpOnly="false"
+													required="false" valueStateText="Invalid entry" maxLength="0" visible="{vendorFieldsVisibility>/visible}"/>
+													<Label xmlns="sap.m" required="true" text="One-time Vendor City" visible="{vendorFieldsVisibility>/visible}"/>
+											<Input xmlns="sap.m" name="One-time Vendor City" value="{createModel>/oneTimeVendorCity}" submit="onsubmitValue" valueState="{createModel>/errorCity}" placeholder="Text" type="Text" showValueHelp="false" enabled="true" width="auto"
+																		valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" visible="{vendorFieldsVisibility>/visible}"/>
+											<Label xmlns="sap.m" required="true" text="One-time Vendor Country" visible="{vendorFieldsVisibility>/visible}"/>
+											<Input xmlns="sap.m" name="One-time Vendor Country" value="{oneTimeVendorCountryModel>/value}" submit="onsubmitValue" liveChange="onsubmitValue"  valueState="{oneTimeVendorCountryModel>/error}" placeholder="Text" type="Text" showValueHelp="true" enabled="true" width="auto"
+																		valueHelpRequest="onValueHelpRequest" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" visible="{vendorFieldsVisibility>/visible}">
+                                                                        <layoutData >
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+                                                </Input>
+                                                <Text width="100%" text="{oneTimeVendorCountryModel>/desc}" visible="{vendorFieldsVisibility>/visible}">
+												<layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+											</Text>
+											<Label text="Invoice Date" required="true"/>
+											<DatePicker id="invoiceDate" placeholder="yyyyMMdd" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="false" visible="true"
+																		valueFormat="yyyyMMdd" value="{createModel>/invoiceDate}" change="onDateSelection"/>
+											<Label xmlns="sap.m" text="Amount" required="true" id="label11"/>
+											<Input xmlns="sap.m" name="amount" value="{createModel>/amount}" submit="onsubmitValue" valueState="{createModel>/errorAmount}" placeholder="Number" type="Number" enabled="true" visible="true" width="auto" valueHelpOnly="false"
+																		required="false" valueStateText="Invalid entry" maxLength="0"/>
+																	<Input value="{currencyListModel>/value}" valueState="{currencyListModel>/error}" editable="false" submit="onsubmitValue" liveChange="onsubmitValue" placeholder="Currency Key" type="Text" showValueHelp="true" enabled="{currencyListModel>/enable}" visible="true" width="auto" valueHelpOnly="false"
+																		required="false" valueStateText="Invalid entry" maxLength="0" valueHelpRequest="onValueHelpRequest" name="Currency">
+                                                                        <layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+                                                </Input>
+                                            <Label text="Exchange rate" required="false"/>
+												<Input value="{createModel>/exchangeRate}" submit="onsubmitValue" placeholder="Number" type="Number" showValueHelp="false" enabled="false" visible="true" width="auto" valueHelpOnly="false"
+																		required="false" valueStateText="Invalid entry" maxLength="0" liveChange="onExchangeValidate"/>
+                                            <Label text="Tax Amount" required="false"/>
+												<Input value="{createModel>/taxAmount}" submit="onsubmitValue" placeholder="Number" type="Number" showValueHelp="false" enabled="false" visible="true" width="auto" valueHelpOnly="false"
+																		required="false" valueStateText="Invalid entry" maxLength="0" />
+                                                                        <Input value="{currencyListModel>/value}" valueState="{currencyListModel>/error}" editable="false" submit="onsubmitValue" liveChange="onsubmitValue" placeholder="Currency Key" type="Text" showValueHelp="true" enabled="{currencyListModel>/enable}" visible="true" width="auto" valueHelpOnly="false"
+																		required="false" valueStateText="Invalid entry" maxLength="0" valueHelpRequest="onValueHelpRequest" name="Currency"/>  
+                                            <Label text="Total Amount" required="false"/>
+												<Input value="{createModel>/invoiceTotalAmount}" submit="onsubmitValue" placeholder="Number" type="Number" showValueHelp="false" enabled="false" visible="true" width="auto" valueHelpOnly="false"
+																		required="false" valueStateText="Invalid entry" maxLength="0" /> 
+                                                <Input value="{currencyListModel>/value}" valueState="{currencyListModel>/error}" editable="false" submit="onsubmitValue" liveChange="onsubmitValue" placeholder="Currency Key" type="Text" showValueHelp="true" enabled="{currencyListModel>/enable}" visible="true" width="auto" valueHelpOnly="false"
+																		required="false" valueStateText="Invalid entry" maxLength="0" valueHelpRequest="onValueHelpRequest" name="Currency"/>                                                                                                     
+											<Label xmlns="sap.m" text="Payment Method" required="false" id="label12"/>
+										<Input xmlns="sap.m" value="{paymentMethodListModel>/value}" valueState="{paymentMethodListModel>/error}" placeholder="Text" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto"
+																name="Payment Methods" submit="onsubmitValue" liveChange="onsubmitValue" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"  valueHelpRequest="onValueHelpRequest">
+												<layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+											</Input>
+
+											<Text width="100%" text="{paymentMethodListModel>/desc}">
+												<layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+											</Text>
+
+											<Label text="Payment Terms" required="false"/>
+										<Input id="idPaymentTermInput" value="{paymentTermListModel>/value}" valueState="{paymentTermListModel>/error}" submit="onsubmitValue" liveChange="onsubmitValue" placeholder="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false"
+														name="Payment Terms" required="false" valueStateText="Invalid entry" maxLength="0" valueHelpRequest="onValueHelpRequest">
+												<layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+											</Input>
+											<Text width="100%" text="{paymentTermListModel>/desc}">
+												<layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+											</Text>
+                                            
+                                           <Label text="Days"/>
+											<Input name="days1"  value="{createModel>/days1}" placeholder="Number" type="Number" enabled="true" visible="true" width="auto" valueHelpOnly="false"
+												required="false" valueStateText="Invalid entry" maxLength="0" submit="onsubmitValue" />
+										    <Input name="discount1" value="{createModel>/discount1}" placeholder="Discount" type="Number" enabled="true" visible="true" width="auto" valueHelpOnly="false"
+												required="false" valueStateText="Invalid entry" maxLength="0" submit="onsubmitValue">
+                                                <layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+                                                </Input>
+                                                <Text width="100%" text="%">
+												<layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+											</Text>
+                                                <Label text="Days"/>
+											<Input name="days2"  value="{createModel>/days2}" placeholder="Number" type="Number" enabled="true" visible="true" width="auto" valueHelpOnly="false"
+												required="false" valueStateText="Invalid entry" maxLength="0" submit="onsubmitValue" />
+										    <Input name="discount2" value="{createModel>/discount2}" placeholder="Discount" type="Number" enabled="true" visible="true" width="auto" valueHelpOnly="false"
+												required="false" valueStateText="Invalid entry" maxLength="0" submit="onsubmitValue">
+                                                <layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+                                                </Input>
+                                                <Text width="100%" text="%">
+												<layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+											</Text>
+                                                <Label text="Days"/>
+											<Input name="days3"  value="{createModel>/days3}" placeholder="Number" type="Number" enabled="true" visible="true" width="auto" valueHelpOnly="false"
+												required="false" valueStateText="Invalid entry" maxLength="0" submit="onsubmitValue" />
+                                            <Label text="Due Date" required="false"/>
+											<DatePicker id="dueDatePicker" width="auto" displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="false" visible="true"
+																		valueFormat="yyyyMMdd" value="{createModel>/dueDate}"/>											
+                                            <Label text="Reference" required="true"/>
+                                            <Input value="{createModel>/reference}" name="reference" submit="onsubmitValue" valueState="{createModel>/errorReference}" placeholder="Text" type="Text" showValueHelp="false" enabled="false" visible="true" width="auto" valueHelpOnly="false"
+																		required="false" valueStateText="Invalid entry" maxLength="0"/>
+											<Label text="Text" required="false"/>
+											<Input value="{createModel>/text}" placeholder="Text" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false"
+																		required="false" valueStateText="Invalid entry" maxLength="0"/>
+											<Label xmlns="sap.m" text="Requester"  required="false" id="label13"/>
+											<Input xmlns="sap.m" name="Requester" value="{requesterModel>/value}" valueState="{requesterModel>/error}" liveChange="onsubmitValue" submit="onsubmitValue" placeholder="Text" showValueHelp="true" enabled="true" visible="true" width="auto"
+																		valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" valueHelpRequest="onValueHelpRequest">
+                                                                        <layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+											</Input>
+											<Label xmlns="sap.m" text="Requester Name" required="false" id="label12_1597063857653"/>
+											<Input xmlns="sap.m" value="{createModel>/requesterName}" placeholder="Text" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto"
+																		valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" />
+										</sap.ui.layout.form:content>
+									</sap.ui.layout.form:SimpleForm>
+										</layout:content>
+									</layout:Grid>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>					
+					<uxap:ObjectPageSection title="{
+                                                     path: 'oAttachmentsModel>/attachmentCount',
+                                                     formatter: '.setAttachmentCount'
+                                                        }">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection title="{
+                                                     path: 'oAttachmentsModel>/attachmentCount',
+                                                     formatter: '.setAttachmentCount'
+                                                        }">
+								<uxap:blocks>
+									<layout:Grid defaultSpan="XL12 L12 M12 S12">
+										<layout:content>
+											<form:Form editable="true">
+												<form:layout>
+													<form:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="2"
+														emptySpanL="2" emptySpanM="2" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+												</form:layout>
+												<form:formContainers>
+													<form:FormContainer title="">
+														<form:formElements>
+															<form:FormElement>
+																<form:fields>
+                                                                    <UploadCollection id="UploadCollection" maximumFileSize="10" multiple="false"  
+                                                    instantUpload="true" change="onAttachmentsChange" uploadEnabled="{oAttachmentModel>/enable}"
+                                                    fileSizeExceed="onFileSizeExceed" beforeUploadStarts="onBeforeUploadStarts" 
+                                                    uploadButtonInvisible="false" numberOfAttachmentsText="" uploadComplete="onUploadComplete"
+                                                    items="{
+                                                        path: 'oAttachmentsModel>/objects/objects',
+                                                        filters : [
+                                                                { path : 'object/succinctProperties/cmis:baseTypeId', operator : 'EQ', value1 : 'cmis:document'}
+                                                                ],
+                                                        templateShareable: false
+                                                    }">
+													<items>
+                                                        <UploadCollectionItem
+                                                            documentId="{oAttachmentsModel>object/succinctProperties/cmis:objectId}"
+                                                            fileName="{oAttachmentsModel>object/succinctProperties/cmis:name}"
+                                                            mimeType="{oAttachmentsModel>object/succinctProperties/cmis:contentStreamMimeType}"
+                                                            url="{
+                                                                path: 'oAttachmentsModel>object/succinctProperties/cmis:objectId',
+                                                                formatter: '.formatDownloadUrl'
+                                                                }"
+                                                            enableEdit="false" enableDelete="true" visibleDelete="true"
+                                                            visibleEdit="false" deletePress="onDeleteAttachment">
+                                                                <attributes>
+                                                                    <ObjectAttribute title="Uploaded On"
+                                                                        text="{
+                                                                            path: 'oAttachmentsModel>object/succinctProperties/cmis:creationDate',
+                                                                            formatter: '.formatTimestampToDate'
+                                                                            }"
+                                                                        active="false" class="displayContents"/>
+                                                                    <ObjectAttribute title="File Size"
+                                                                        text="{
+                                                                            path: 'oAttachmentsModel>object/succinctProperties/cmis:contentStreamLength',
+                                                                            formatter: '.formatFileLength'
+                                                                            }"
+                                                                        active="false" class="displayContents"/>
+                                                                </attributes>
+
+                                                        </UploadCollectionItem>
+                                                    </items>
+                                                    
+												</UploadCollection>
+																</form:fields>
+															</form:FormElement>
+														</form:formElements>
+													</form:FormContainer>
+												</form:formContainers>
+											</form:Form>
+										</layout:content>
+									</layout:Grid>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+					<uxap:ObjectPageSection title="Item Details">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection title="Item Details">
+								<uxap:blocks>
+									<table:Table xmlns:table="sap.ui.table" visibleRowCount="{= ${ItemDetails>/data}.length}" width="100%" rows="{ItemDetails>/data}" selectionMode="None">
+										<table:extension>
+											<OverflowToolbar design="Transparent">
+												<content>
+													<ToolbarSpacer/>
+													<Button text="" icon="sap-icon://add" iconFirst="false" press="navToAddItemPage" type="Transparent">
+														<layoutData>
+															<OverflowToolbarLayoutData />
+														</layoutData>
+													</Button>
+												</content>
+											</OverflowToolbar>
+										</table:extension>
+										<table:columns>
+                                        <table:Column width="5rem" hAlign="Left">
+                                                <Label text="Action"/>
+												<table:template>
+													<HBox>
+														<Button text="" type="Default" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+															press="onDeleteDetailItem"/>
+                                                        <Button text="" type="Default" icon="sap-icon://edit" iconFirst="true" width="auto" enabled="true" visible="true"
+															iconDensityAware="false" press="onEditItemDetails"/>
+													</HBox>
+												</table:template>
+											</table:Column>
+											<table:Column width="6rem" hAlign="Left">
+													<Label text="GL Account"/>
+                                                    <table:template>
+                                                        <Text wrapping="true" text="{ItemDetails>glAccount}" width="auto"/>
+                                                    </table:template>
+											</table:Column>
+											<table:Column width="6rem" hAlign="Left">
+								                <Label wrapping="true" text="Cost Center"/>
+							                    <table:template>
+                                                    <Text wrapping="true" text="{ItemDetails>costCenter}" width="auto"/>
+                                                </table:template>
+											</table:Column>
+											<table:Column width="6rem" hAlign="Left">
+												<Label wrapping="true" text="Amount in document currency"/>
+                                                <table:template>
+                                                    <Text wrapping="true" width="auto" text="{ItemDetails>amount}"/>
+												</table:template>
+											</table:Column>
+											<table:Column width="6rem" hAlign="Left">
+                                                <Label wrapping="true" text="Currency Key" id="text14"/>
+												<table:template>
+													<Text wrapping="true" text="{ItemDetails>currencyKey}" width="auto"/>
+												</table:template>
+											</table:Column>
+											<table:Column width="6rem" hAlign="Left">
+                                                <Label wrapping="true" text="Tax Code"/>
+												<table:template>
+													<Text wrapping="true" text="{ItemDetails>taxCode}" width="auto"/>
+												</table:template>
+											</table:Column>
+											<table:Column width="6rem" hAlign="Left">
+                                                <Label wrapping="true" text="Business Area"/>
+												<table:template>
+													<Text wrapping="true" text="{ItemDetails>businessArea}" width="auto"/>
+												</table:template>
+											</table:Column>
+											<table:Column width="6rem" hAlign="Left">
+                                                <Label wrapping="true" text="Profit Center"/>
+												<table:template>
+													<Text wrapping="true" text="{ItemDetails>profitCenter}" width="auto"/>
+												</table:template>
+											</table:Column>
+											<table:Column width="6rem" hAlign="Left">
+                                                <Label wrapping="true" text="Plant"/>
+												<table:template>
+													<Text wrapping="true" text="{ItemDetails>plant}" width="auto"/>
+												</table:template>
+											</table:Column>
+											<table:Column width="6rem" hAlign="Left">
+                                                <Label wrapping="true" text="Item Text"/>
+												<table:template>
+													<Text wrapping="true" text="{ItemDetails>itemText}" width="auto"/>
+												</table:template>
+											</table:Column>
+											<table:Column width="6rem" hAlign="Left">
+                                                <Label wrapping="true" text="Internal Order"/>
+												<table:template>
+													<Text wrapping="true" text="{ItemDetails>internalOrder}" width="auto"/>
+												</table:template>
+											</table:Column>
+											
+										</table:columns>
+									</table:Table>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+                   
+                    <uxap:ObjectPageSection title="Rework Details">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection title="Rework Reason">
+								<uxap:blocks>
+                                <Table width="100%" growing="true" items="{context>/internal/reworkReason}" growingScrollToLoad="true" growingThreshold="25" mode="None" sticky="ColumnHeaders">
+										<columns>
+											<Column width="auto" hAlign="Left" vAlign="Middle" popinDisplay="Inline" mergeDuplicates="false" minScreenWidth="Phone">
+												<header>
+													<Text text="Details"/>
+												</header>
+											</Column>
+                                        </columns>
+                                        <items>
+											<ColumnListItem xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout"
+												xmlns:form="sap.ui.layout.form" xmlns="sap.m" type="Active" id="item7_copy1">
+												<cells>
+													<Text text="{context>message}" width="auto"/>
+                                                    </cells>
+											</ColumnListItem>
+                                        </items>    
+                                </Table>
+                                </uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+				</uxap:sections>
+			</uxap:ObjectPageLayout>
+		</content>
+	</Page>
+    </App>
+</mvc:View>

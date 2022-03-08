@@ -46,9 +46,37 @@ modules:
       - comsapcpdpainvwpoStartUI.zip
       name: comsapcpdpainvwpoStartUI
       target-path: resources/
+    - artifacts:
+      - comsapcpdpainvwpoReworkUI.zip
+      name: comsapcpdpainvwpoReworkUI
+      target-path: resources/
+    - artifacts:
+      - comsapcpdpainvwpotaskUI.zip
+      name: comsapcpdpainvwpotaskUI
+      target-path: resources/
 - name: comsapcpdpainvwpoStartUI
   type: html5
   path: StartUI
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comsapcpdpainvwpoReworkUI
+  type: html5
+  path: ReworkUI
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comsapcpdpainvwpotaskUI
+  type: html5
+  path: taskUI
   build-parameters:
     build-result: dist
     builder: custom

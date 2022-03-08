@@ -1,0 +1,411 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:uxap="sap.uxap" xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:u="sap.ui.unified" xmlns:form="sap.ui.layout.form" xmlns:treeTable="sap.ui.table" controllerName="com.sap.cp.dpa.invwpo.taskUI.controller.Approve">
+<App id="app">
+	<pages>
+        <Page title="{i18n>title}" showHeader="false">
+            <content>
+                <uxap:ObjectPageLayout showTitleInHeaderContent="false" class="sapUiSizeCompact">
+                    <uxap:sections>
+                        <uxap:ObjectPageSection title="{i18n>HeaderDetailsSection}">
+                            <uxap:subSections>
+                                <uxap:ObjectPageSubSection title="{i18n>HeaderDetailsSection}">
+                                    <uxap:blocks>
+                                        <layout:Grid defaultSpan="XL12 L12 M12 S12">
+                                            <layout:content>
+                                                <form:Form editable="true">
+                                                    <form:layout>
+                                                        <form:ColumnLayout/>
+                                                    </form:layout>
+                                                    <form:formContainers>
+                                                        <form:FormContainer title="">
+                                                            <form:formElements>
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>CompanyCode}"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/companyCode}"/>
+                                                                        <Text text="{/invoiceDetails/headerDetail/companyCodeDesc}">
+                                                                            <layoutData>
+                                                                                <form:ColumnElementData cellsLarge="6"/>
+                                                                            </layoutData>
+                                                                        </Text>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>VendorNumber}" />
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/vendorNumber}"/>
+                                                                        <Text text="{/invoiceDetails/headerDetail/vendorNumberDesc}">
+                                                                            <layoutData>
+                                                                                <form:ColumnElementData cellsLarge="6"/>
+                                                                            </layoutData>
+                                                                        </Text>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>OneTimeVendor}"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <CheckBox selected="{/invoiceDetails/headerDetail/oneTimeVendor}" editable="false"/>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement id="element11_copy" visible="{/invoiceDetails/headerDetail/oneTimeVendor}">
+                                                                    <form:label>
+                                                                        <Label id="label11_copy" text="{i18n>OnetimeVendorName}"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/oneTimeVendorName}"/>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement id="element10_1597063791968" visible="{/invoiceDetails/headerDetail/oneTimeVendor}">
+                                                                    <form:label>
+                                                                        <Label text="{i18n>OnetimeVendorCity}" id="label10"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/oneTimeVendorCity}"/>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement id="element11_1597063823808" visible="{/invoiceDetails/headerDetail/oneTimeVendor}">
+                                                                    <form:label>
+                                                                        <Label text="{i18n>OnetimeVendorCountry}" id="label11_1597063823805"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/oneTimeVendorCountry}"/>
+                                                                        <Text text="{/invoiceDetails/headerDetail/oneTimeVendorCountryDesc}">
+                                                                            <layoutData>
+                                                                                <form:ColumnElementData cellsLarge="6"/>
+                                                                            </layoutData>
+                                                                        </Text>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>InvoiceDate}"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{path: '/invoiceDetails/headerDetail/invoiceDate', formatter: '.formatDate'}"/>                                                        
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement id="element11">
+                                                                    <form:label>
+                                                                        <Label text="{i18n>Amount}" id="label11"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/invoiceAmount} {/invoiceDetails/headerDetail/currency}"/>                                                                        
+                                                                    </form:fields>
+                                                                </form:FormElement>  
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>PaymentMethod}"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/paymentMethod} {/invoiceDetails/headerDetail/paymentMethodDesc}"/>                                                                        
+                                                                    </form:fields>
+                                                                </form:FormElement>     
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>PaymentTerms}"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/paymentTerm} {/invoiceDetails/headerDetail/paymentTermDesc}"/>                                                                        
+                                                                    </form:fields>
+                                                                </form:FormElement>                            
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>DueDate}"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{path: '/invoiceDetails/headerDetail/invoiceDueDate', formatter: '.formatDate'}"/>                                                
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>Exchangerate}"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/exchangeRate}"/>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>TaxAmount} "/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/taxAmount} {/invoiceDetails/headerDetail/currency}"/>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>TotalAmount}"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/invoiceTotalAmount} {/invoiceDetails/headerDetail/currency}"/>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>Reference}"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/reference}"/>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement>
+                                                                    <form:label>
+                                                                        <Label text="{i18n>Text}"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/text}"/>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement id="element13">
+                                                                    <form:label>
+                                                                        <Label xmlns="sap.m" text="{i18n>Requester}" id="label13"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/requester}"/>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement id="element12_1597063857656">
+                                                                    <form:label>
+                                                                        <Label text="{i18n>RequesterName}" id="label12_1597063857653"/>
+                                                                    </form:label>
+                                                                    <form:fields>
+                                                                        <Text text="{/invoiceDetails/headerDetail/requesterName}"/>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                            </form:formElements>
+                                                        </form:FormContainer>
+                                                    </form:formContainers>
+                                                </form:Form>
+                                            </layout:content>
+                                        </layout:Grid>
+                                    </uxap:blocks>
+                                </uxap:ObjectPageSubSection>
+                            </uxap:subSections>
+                        </uxap:ObjectPageSection>
+                        <uxap:ObjectPageSection title="{i18n>PaymentTerms}">
+                            <uxap:subSections>
+                                <uxap:ObjectPageSubSection title="{i18n>PaymentTerms}">
+                                    <uxap:blocks>
+                                        <layout:Grid defaultSpan="XL12 L12 M12 S12">
+                                            <layout:content>
+                                                <Table width="100%" mode="None" sticky="ColumnHeaders" items="{/invoiceDetails/paymentTerms}">
+                                                    <columns>
+                                                        <Column width="auto" hAlign="Left" vAlign="Middle" popinDisplay="Inline" mergeDuplicates="false" minScreenWidth="Phone">
+                                                            <header>
+                                                                <Text text="{i18n>PaymentTermDays}"/>
+                                                            </header>
+                                                        </Column>
+                                                        <Column width="auto" hAlign="Left" vAlign="Middle" popinDisplay="Inline" mergeDuplicates="false" minScreenWidth="Phone">
+                                                            <header>
+                                                                <Text text="{i18n>PaymentTermDiscount}"/>
+                                                            </header>
+                                                        </Column>                                                    
+                                                    </columns>
+                                                    <items>
+                                                        <ColumnListItem xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc" xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns="sap.m" type="Active">
+                                                            <cells>
+                                                                <Text text="{days}" width="auto"/>
+                                                                <Text text="{percentageAmount}" width="auto"/>
+                                                                </cells>
+                                                        </ColumnListItem>
+                                                    </items>
+                                                </Table>                                                 
+                                            </layout:content>
+                                        </layout:Grid>
+                                    </uxap:blocks>
+                                </uxap:ObjectPageSubSection>
+                            </uxap:subSections>
+                        </uxap:ObjectPageSection>
+                        <uxap:ObjectPageSection title="{i18n>Attachments}">
+                            <uxap:subSections>
+                                <uxap:ObjectPageSubSection title="{i18n>Attachments}">
+                                    <uxap:blocks>
+                                        <layout:Grid defaultSpan="XL12 L12 M12 S12">
+                                            <layout:content>
+                                                <UploadCollection
+                                                    id="UploadCollection" noDataText="{i18n>NoAttachments}" items="{path: 'attachmentsModel>/objects', templateShareable: false}" uploadButtonInvisible="true" uploadEnabled="false">
+                                                    <items>
+                                                        <UploadCollectionItem
+                                                            documentId="{attachmentsModel>object/succinctProperties/cmis:objectId}"
+                                                            fileName="{attachmentsModel>object/succinctProperties/cmis:name}"
+                                                            mimeType="{attachmentsModel>object/succinctProperties/cmis:contentStreamMimeType}"
+                                                            url="{
+                                                                path: 'attachmentsModel>object/succinctProperties/cmis:objectId',
+                                                                formatter: '.formatDownloadUrl'
+                                                                }"
+                                                            enableEdit="false" enableDelete="false" visibleDelete="false" visibleEdit="false">
+                                                            <attributes>
+                                                                <ObjectAttribute title="{i18n>UploadedOn}" text="{
+                                                                    path: 'attachmentsModel>object/succinctProperties/cmis:creationDate',
+                                                                    formatter: '.formatTimestampToDate'
+                                                                    }" active="false"/>
+                                                                <ObjectAttribute title="{i18n>FileSize}"
+                                                                    text="{
+                                                                        path: 'attachmentsModel>object/succinctProperties/cmis:contentStreamLength',
+                                                                        formatter: '.formatFileLength'
+                                                                        }"
+                                                                    active="false" class="displayContents"/>
+                                                            </attributes>
+                                                        </UploadCollectionItem>
+                                                    </items>
+                                                </UploadCollection>
+                                            </layout:content>
+                                        </layout:Grid>
+                                    </uxap:blocks>
+                                </uxap:ObjectPageSubSection>
+                            </uxap:subSections>
+                        </uxap:ObjectPageSection>
+                        <uxap:ObjectPageSection title="{i18n>ItemDetails}">
+                            <uxap:subSections>
+                                <uxap:ObjectPageSubSection title="{i18n>ItemDetails}">
+                                    <uxap:blocks>                                       
+                                        <treeTable:TreeTable
+                                            id="TreeTable"
+                                            rows="{path:'/approval/itemTreeTable/catalog/items', parameters: {arrayNames:['categories', 'category']}}"
+                                            selectionMode="None"
+                                            visibleRowCountMode="Auto"
+                                            enableSelectAll="false">
+                                            <treeTable:extension>
+                                                <OverflowToolbar>
+                                                    <Title id="title" text="{i18n>ItemDetails}"/>
+                                                </OverflowToolbar>
+                                            </treeTable:extension>
+				
+                                            <treeTable:columns>
+                                                <treeTable:Column width="13rem">
+                                                    <Label text="{i18n>ItemDetailsCategories}"/>
+                                                    <treeTable:template>
+                                                        <Text text="{name}" wrapping="false"/>
+                                                    </treeTable:template>
+                                                </treeTable:Column>
+                                                <treeTable:Column width="9rem">
+                                                    <Label text="{i18n>GLAccount}"/>
+                                                    <treeTable:template>
+                                                        <Text text="{glAccount}" wrapping="false"/>
+                                                        
+                                                    </treeTable:template>
+                                                </treeTable:Column>
+                                                <treeTable:Column width="9rem">
+                                                    <Label text="{i18n>ItemText}"/>
+                                                    <treeTable:template>
+                                                        <Text text="{itemText}" wrapping="true"/>
+                                                    </treeTable:template>
+                                                </treeTable:Column>
+                                                <treeTable:Column width="9rem">
+                                                    <Label text="{i18n>CostCenter}"/>
+                                                    <treeTable:template>
+                                                        <Text text="{costCenter}" wrapping="false"/>
+                                                    </treeTable:template>
+                                                </treeTable:Column>
+                                                <treeTable:Column width="9rem">
+                                                    <Label text="{i18n>ProfitCenter}"/>
+                                                    <treeTable:template>
+                                                        <Text text="{profitCenter}" wrapping="true"/>
+                                                    </treeTable:template>
+                                                </treeTable:Column>
+                                                <treeTable:Column width="9rem">
+                                                    <Label text="{i18n>TaxCode}"/>
+                                                    <treeTable:template>
+                                                        <Text text="{taxCode}" wrapping="false"/>
+                                                    </treeTable:template>
+                                                </treeTable:Column>
+                                                <treeTable:Column width="9rem">
+                                                    <Label text="{i18n>InternalOrder}"/>
+                                                    <treeTable:template>
+                                                        <Text text="{internalOrder}" wrapping="true"/>
+                                                    </treeTable:template>
+                                                </treeTable:Column>
+                                                <treeTable:Column width="9rem">
+                                                    <Label text="{i18n>BusinessArea}"/>
+                                                    <treeTable:template>
+                                                        <Text text="{businessArea}" wrapping="false"/>
+                                                    </treeTable:template>
+                                                </treeTable:Column>
+                                                <treeTable:Column width="9rem">
+                                                    <Label text="{i18n>Amount}"/>
+                                                    <treeTable:template>
+                                                        <Text text="{amount}" wrapping="true"/>
+                                                    </treeTable:template>
+                                                </treeTable:Column>
+                                                <treeTable:Column width="9rem">
+                                                    <Label text="{i18n>currency}"/>
+                                                    <treeTable:template>
+                                                        <Text text="{currency}" wrapping="true"/>
+                                                    </treeTable:template>
+                                                </treeTable:Column>
+                                                <treeTable:Column width="9rem">
+                                                    <Label text="{i18n>Plant}"/>
+                                                    <treeTable:template>
+                                                        <Text text="{plant}" wrapping="true"/>
+                                                    </treeTable:template>
+                                                </treeTable:Column>
+                                            </treeTable:columns>
+			                            </treeTable:TreeTable>
+                                    </uxap:blocks>
+                                </uxap:ObjectPageSubSection>
+                            </uxap:subSections>
+                        </uxap:ObjectPageSection>
+                        <uxap:ObjectPageSection titleUppercase="false" title="{i18n>Comments}" titleLevel="H6" showTitle="true">
+                            <uxap:subSections>
+                                <uxap:ObjectPageSubSection>
+                                    <uxap:blocks>
+                                        <form:SimpleForm id="commentsFormId" editable="true" layout="ResponsiveGridLayout" title="" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+                                            labelSpanS="12" adjustLabelSpan="false" emptySpanXL="3" emptySpanL="3" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+                                            singleContainerFullSize="true">
+                                            <form:content>
+                                                <Label text="{i18n>Comments}"/>
+                                                <TextArea rows="10" value="{/comments}" editable="true"/>
+                                            </form:content>
+                                        </form:SimpleForm>
+                                    </uxap:blocks>
+                                </uxap:ObjectPageSubSection>
+                            </uxap:subSections>
+                        </uxap:ObjectPageSection>
+                        <!-- History -->
+						<uxap:ObjectPageSection titleUppercase="false" title="{i18n>History}" titleLevel="H6" showTitle="true">
+							<uxap:subSections>
+								<uxap:ObjectPageSubSection>
+									<uxap:blocks>
+                                        <Table inset="false" 
+                                            items="{path: '/history'}">
+		                                    <columns>
+			                                    <Column>
+				                                    <Text text="{i18n>ApproverHistoryUser}" />
+			                                    </Column>
+                                                <Column>
+				                                    <Text text="{i18n>ApproverHistoryRole}" />
+			                                    </Column>
+                                                <Column>
+				                                    <Text text="{i18n>ApproverHistoryDecision}" />
+			                                    </Column>
+                                                <Column>
+				                                    <Text text="{i18n>ApproverHistoryComments}" />
+			                                    </Column>
+		                                    </columns>
+		                                    <items>
+			                                    <ColumnListItem>
+				                                    <cells>
+					                                    <Text text="{userId}" />
+                                                        <Text text="{role}" />
+                                                        <Text text="{actionText}" />
+                                                        <Text text="{comments}" />
+				                                    </cells>
+			                                    </ColumnListItem>
+		                                    </items>
+	                                    </Table>
+									</uxap:blocks>
+								</uxap:ObjectPageSubSection>
+							</uxap:subSections>
+						</uxap:ObjectPageSection>
+                    </uxap:sections>
+                </uxap:ObjectPageLayout>
+            </content>
+        </Page>
+    </pages>
+</App>
+</mvc:View>
