@@ -1,0 +1,92 @@
+_schema-version: "3.2"
+ID: NonPOVendorInvoiceUI
+version: 0.0.1
+modules:
+- name: NonPOVendorInvoiceUI-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: NonPOVendorInvoiceUI-destination-service
+    parameters:
+      content-target: true
+  - name: NonPOVendorInvoiceUI_html_repo_host
+    parameters:
+      service-key:
+        name: NonPOVendorInvoiceUI_html_repo_host-key
+  - name: uaa_NonPOVendorInvoiceUI
+    parameters:
+      service-key:
+        name: uaa_NonPOVendorInvoiceUI-key
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: NonPOVendorInvoiceUI_NonPOVendorInvoiceUI_html_repo_host
+          ServiceInstanceName: NonPOVendorInvoiceUI-html5-app-host-service
+          ServiceKeyName: NonPOVendorInvoiceUI_html_repo_host-key
+          sap.cloud.service: NonPOVendorInvoiceUI
+        - Authentication: OAuth2UserTokenExchange
+          Name: NonPOVendorInvoiceUI_uaa_NonPOVendorInvoiceUI
+          ServiceInstanceName: NonPOVendorInvoiceUI-xsuaa-service
+          ServiceKeyName: uaa_NonPOVendorInvoiceUI-key
+          sap.cloud.service: NonPOVendorInvoiceUI
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: NonPOVendorInvoiceUI-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: NonPOVendorInvoiceUI_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comsapcpdpainvwpoStartUI.zip
+      name: comsapcpdpainvwpoStartUI
+      target-path: resources/
+- name: comsapcpdpainvwpoStartUI
+  type: html5
+  path: StartUI
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: NonPOVendorInvoiceUI-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        subaccount:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: NonPOVendorInvoiceUI-destination-service
+    service-plan: lite
+- name: NonPOVendorInvoiceUI_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: NonPOVendorInvoiceUI-html5-app-host-service
+    service-plan: app-host
+- name: uaa_NonPOVendorInvoiceUI
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: NonPOVendorInvoiceUI-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo

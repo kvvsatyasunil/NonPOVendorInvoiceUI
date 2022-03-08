@@ -1,0 +1,123 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:uxap="sap.uxap" xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:u="sap.ui.unified" xmlns:form="sap.ui.layout.form" controllerName="com.sap.cp.dpa.invwpo.StartUI.controller.AddItem">
+	<Page title="Add Item">
+		<content>
+			<layout:Grid defaultSpan="XL12 L12 M12 S12">
+				<layout:content>
+					<sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true"
+										layout="ResponsiveGridLayout" id="form0" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+                                        columnsXL="6" columnsL="6" columnsM="6" emptySpanXL="3" emptySpanL="3" emptySpanM="3">
+										<sap.ui.layout.form:content>
+                                        
+											<Label text="GL Account" required="true"/>
+										
+											<Input name="GLAccount" value="{GLAccountModel>/value}" liveChange="onSubmitValue" submit="onSubmitValue" valueState="{GLAccountModel>/error}" valueHelpRequest="onValueHelpRequest" placeholder="Text" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0">
+                                             <layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+                                             </Input> 
+                                            <Text width="100%" text="{GLAccountModel>/desc}">
+                                            <layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+												</Text>
+											<Label text="Cost Center"/>
+										
+											<Input name="costCenter" value="{costCenterModel>/value}" valueState="{costCenterModel>/error}" submit="onSubmitValue" liveChange="onSubmitValue" valueHelpRequest="onValueHelpRequest" placeholder="Text" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0">
+                                             <layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+                                             </Input> 
+                                            <Text width="100%" text="{costCenterModel>/desc}">
+                                            <layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+												</Text>
+											<Label xmlns="sap.m"  text="Amount in document currency" required="true" id="label11"/>
+										
+											<Input xmlns="sap.m" name="amount" submit="onSubmitValue" value="{AddItemModel>/amount}" valueState="{AddItemModel>/errorAmount}" valueHelpRequest="onValueHelpRequest" placeholder="Number" type="Number" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" id="input22_1595509685052">
+										 </Input> 
+											<Label text="Currency Key"/>
+										
+											<Input value="{AddItemModel>/currencyKey}" placeholder="Text" type="Text" enabled="true" visible="true" editable="false">
+										 </Input> 
+									
+											<Label xmlns="sap.m" text="Tax Code" required="false" id="label12"/>
+										
+											<Input xmlns="sap.m" name="taxCode" value="{taxCodeModel>/value}" valueState="{taxCodeModel>/error}" submit="onSubmitValue" liveChange="onSubmitValue" valueHelpRequest="onValueHelpRequest" placeholder="Text" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" id="input25_1595510620358">
+										 <layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+                                         </Input> 
+                                        <Text width="100%" text="{taxCodeModel>/desc}">
+                                            <layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+												</Text>
+											<Label text="Business Area" required="false"/>
+										
+											<Input name="businessArea" value="{businessAreaModel>/value}" valueState="{businessAreaModel>/error}" submit="onSubmitValue" liveChange="onSubmitValue" valueHelpRequest="onValueHelpRequest" placeholder="Text" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0">
+										 <layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+                                         </Input> 
+                                        <Text width="100%" text="{businessAreaModel>/desc}">
+                                            <layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+												</Text>
+											<Label text="Profit Center" required="false"/>
+										
+											<Input name="profitCenter" value="{profitCenterModel>/value}" valueState="{profitCenterModel>/error}" submit="onSubmitValue" liveChange="onSubmitValue" valueHelpRequest="onValueHelpRequest" placeholder="Text" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0">
+										 <layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+                                         </Input> 
+                                        <Text width="100%" text="{profitCenterModel>/desc}">
+                                            <layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+												</Text>
+											<Label text="Plant "/>
+										
+											<Input name="plant" value="{plantModel>/value}" valueState="{plantModel>/error}" submit="onSubmitValue" liveChange="onSubmitValue" valueHelpRequest="onValueHelpRequest" placeholder="Text" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0">
+										<layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+                                         </Input> 
+                                        <Text width="100%" text="{plantModel>/desc}">
+                                            <layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+												</Text>
+											<Label text="Item Text" required="false"/>
+										
+											<Input value="{AddItemModel>/itemText}" valueHelpRequest="onValueHelpRequest" placeholder="Text" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0">
+										 </Input>
+									        <Label xmlns="sap.m" text="Internal Order" id="label13"/>
+									    
+									        <Input xmlns="sap.m" name="internalOrder" value="{internalOrderModel>/value}" valueState="{internalOrderModel>/error}" valueHelpRequest="onValueHelpRequest" liveChange="onFieldValidation" placeholder="Text" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" id="input9">
+
+									        <layoutData>
+													<layout:GridData span="XL6 L6 M6"/>
+												</layoutData>
+                                                 </Input>
+                                            <Text width="100%" text="{internalOrderModel>/desc}">
+                                            <layoutData>
+													<layout:GridData span="XL3 L3 M3"/>
+												</layoutData>
+												</Text>
+                                                
+                                    </sap.ui.layout.form:content>
+									</sap.ui.layout.form:SimpleForm>							
+				</layout:content>
+			</layout:Grid>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button text="Add" type="Emphasized" press="handleAddItemDetails"/>
+				<Button text="Cancel" type="Default" press="handleCancelAction"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>
